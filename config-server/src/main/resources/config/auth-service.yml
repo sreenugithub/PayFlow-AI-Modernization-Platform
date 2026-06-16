@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/payflow_auth_db
+
+jwt:
+  secret: PayFlowVeryStrongJwtSecretKeyForDevOnly123456789
+  expiration-ms: 86400000000000

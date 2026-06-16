@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    gateway:
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      routes:
+
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/api/auth/**
+
+        - id: payment-service
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/api/payments/**
+
+jwt:
+  secret: PayFlowVeryStrongJwtSecretKeyForDevOnly123456789
