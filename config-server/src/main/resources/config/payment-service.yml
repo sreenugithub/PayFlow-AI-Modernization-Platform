@@ -13,3 +13,9 @@ payment:
     topics:
       payment-created: payment-created-topic
       payment-status-updated: payment-status-updated-topic
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: false
+    instance-id: ${spring.application.name}:${server.port}

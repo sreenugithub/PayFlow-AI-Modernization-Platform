@@ -1,19 +1,18 @@
 package com.payflow.audit_service.repository;
 
-import com.payflow.audit_service.entity.PaymentAuditEvent;
+import com.payflow.audit_service.entity.DltEvent;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface PaymentAuditRepository
-        extends MongoRepository<PaymentAuditEvent, String> {
+public interface DltEventRepository
+        extends MongoRepository<DltEvent, String> {
 
-    List<PaymentAuditEvent>
-    findByPaymentReferenceOrderByReceivedAtAsc(
+    List<DltEvent>
+    findByPaymentReference(
             String paymentReference);
 
-    List<PaymentAuditEvent>
+    List<DltEvent>
     findByPaymentReferenceContainingIgnoreCase(
             String paymentReference);
 }
-

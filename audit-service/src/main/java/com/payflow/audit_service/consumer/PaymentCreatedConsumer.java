@@ -30,6 +30,10 @@ public class PaymentCreatedConsumer {
         log.info("Audit event received for paymentReference={}",
                 event.getPaymentReference());
 
+        if (event.getAmount() > 5000) {
+            throw new RuntimeException("Simulated processing failure");
+        }
+
         PaymentAuditEvent auditEvent =
                 PaymentAuditEvent.builder()
                         .paymentId(event.getPaymentId())
