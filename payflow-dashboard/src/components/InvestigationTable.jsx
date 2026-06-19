@@ -13,8 +13,14 @@ import { useNavigate } from "react-router-dom";
 
 function getHealthColor(healthScore) {
     if (healthScore === "CRITICAL") return "error";
+    if (healthScore === "MEDIUM") return "warning";
     if (healthScore === "WARNING") return "warning";
     return "success";
+}
+
+function getHealthLabel(healthScore) {
+    if (healthScore === "WARNING") return "MEDIUM";
+    return healthScore;
 }
 
 function InvestigationTable({ investigations }) {
@@ -54,7 +60,7 @@ function InvestigationTable({ investigations }) {
                             <TableCell>{item.investigationStatus}</TableCell>
                             <TableCell>
                                 <Chip
-                                    label={item.healthScore}
+                                    label={getHealthLabel(item.healthScore)}
                                     color={getHealthColor(item.healthScore)}
                                     size="small"
                                 />

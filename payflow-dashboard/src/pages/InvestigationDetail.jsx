@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
     Alert,
     Box,
@@ -20,7 +20,7 @@ function InvestigationDetail() {
 
     const { paymentReference } =
         useParams();
-
+    const navigate = useNavigate();
     const [investigation, setInvestigation] =
         useState(null);
     const [aiResponse, setAiResponse] =
@@ -86,6 +86,13 @@ function InvestigationDetail() {
 
     return (
         <Box sx={{ padding: "18px" }}>
+            <Button
+                variant="outlined"
+                sx={{ mb: 2 }}
+                onClick={() => navigate("/")}>
+                Back to Dashboard
+            </Button>
+
             <Typography
                 variant="h4"
                 component="h2"

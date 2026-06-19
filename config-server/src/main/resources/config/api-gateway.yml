@@ -8,11 +8,20 @@ spring:
           lower-case-service-id: true
 
       routes:
-
         - id: auth-service
           uri: lb://AUTH-SERVICE
           predicates:
             - Path=/api/auth/**
+
+        - id: audit-service
+          uri: lb://AUDIT-SERVICE
+          predicates:
+            - Path=/api/investigation/**
+
+        - id: ai-investigation-service
+          uri: lb://AI-INVESTIGATION-SERVICE
+          predicates:
+            - Path=/api/ai/**
 
         - id: payment-service
           uri: lb://PAYMENT-SERVICE

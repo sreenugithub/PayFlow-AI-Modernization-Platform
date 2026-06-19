@@ -37,7 +37,7 @@ function SummaryCards({ summary }) {
                 <Card>
                     <CardContent>
                         <Typography variant="h6">
-                            Warning
+                            Medium
                         </Typography>
                         <Typography variant="h4">
                             {summary.warningPayments}

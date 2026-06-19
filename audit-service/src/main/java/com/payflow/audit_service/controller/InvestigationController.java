@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -21,10 +20,10 @@ public class InvestigationController {
 
     @GetMapping("/{paymentReference}")
     public InvestigationResponse investigate(
-            @PathVariable UUID paymentReference) {
+            @PathVariable String paymentReference) {
 
         return investigationService.investigate(
-                paymentReference.toString());
+                paymentReference);
     }
 
     @GetMapping
@@ -84,9 +83,9 @@ public class InvestigationController {
 
     @GetMapping("/{paymentReference}/ai-analysis")
     public AiInvestigationResponse aiAnalysis(
-            @PathVariable UUID paymentReference) {
+            @PathVariable String paymentReference) {
 
         return investigationService.aiAnalysis(
-                paymentReference.toString());
+                paymentReference);
     }
 }

@@ -13,7 +13,7 @@ public class AiInvestigationClient {
 
     private final WebClient.Builder webClientBuilder;
 
-    @Value("${ai-investigation.service.url:http://localhost:8086/api/ai/investigate}")
+    @Value("${ai-investigation.service.url:http://localhost:8080/api/ai/investigate}")
     private String aiInvestigationUrl;
 
     public AiInvestigationResponse investigate(
