@@ -3,6 +3,7 @@ package com.payflow.audit_service.controller;
 import com.payflow.audit_service.dto.DashboardSummaryResponse;
 import com.payflow.audit_service.dto.InvestigationResponse;
 import com.payflow.audit_service.dto.InvestigationSummaryDto;
+import com.payflow.audit_service.dto.ai.AiInvestigationResponse;
 import com.payflow.audit_service.service.InvestigationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -79,5 +80,13 @@ public class InvestigationController {
             @RequestParam String keyword) {
 
         return investigationService.search(keyword);
+    }
+
+    @GetMapping("/{paymentReference}/ai-analysis")
+    public AiInvestigationResponse aiAnalysis(
+            @PathVariable UUID paymentReference) {
+
+        return investigationService.aiAnalysis(
+                paymentReference.toString());
     }
 }

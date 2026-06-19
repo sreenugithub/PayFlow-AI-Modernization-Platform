@@ -9,6 +9,7 @@ import {
     Chip,
     Typography
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function getHealthColor(healthScore) {
     if (healthScore === "CRITICAL") return "error";
@@ -17,6 +18,8 @@ function getHealthColor(healthScore) {
 }
 
 function InvestigationTable({ investigations }) {
+    const navigate = useNavigate();
+
     if (!investigations || investigations.length === 0) {
         return <Typography>No investigations found</Typography>;
     }
@@ -37,7 +40,15 @@ function InvestigationTable({ investigations }) {
 
                 <TableBody>
                     {investigations.map((item) => (
-                        <TableRow key={item.paymentReference}>
+                        <TableRow
+                            key={item.paymentReference}
+                            hover
+                            sx={{ cursor: "pointer" }}
+                            onClick={() =>
+                                navigate(
+                                    `/investigation/${item.paymentReference}`
+                                )
+                            }>
                             <TableCell>{item.paymentReference}</TableCell>
                             <TableCell>{item.paymentStatus}</TableCell>
                             <TableCell>{item.investigationStatus}</TableCell>
@@ -51,6 +62,7 @@ function InvestigationTable({ investigations }) {
                             <TableCell>{item.totalEvents}</TableCell>
                             <TableCell>{item.totalDltEvents}</TableCell>
                         </TableRow>
+
                     ))}
                 </TableBody>
             </Table>

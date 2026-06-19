@@ -30,3 +30,7 @@ payment:
       payment-status-updated: payment-status-updated-topic
       payment-stuck: payment-stuck-topic
       payment-created-dlt: payment-created-topic-dlt
+
+ai-investigation:
+  service:
+    url: http://localhost:8086/api/ai/investigate

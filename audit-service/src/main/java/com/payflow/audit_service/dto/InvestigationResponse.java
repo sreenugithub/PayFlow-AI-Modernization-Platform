@@ -28,6 +28,9 @@ public class InvestigationResponse {
     private Integer totalEvents;
 
     private Integer totalDltEvents;
-
+    private String severity;
+    private String ownerTeam;
     private List<TimelineEventDto> timeline;
+
+
 }

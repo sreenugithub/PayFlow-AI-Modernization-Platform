@@ -4,10 +4,14 @@ import com.payflow.audit_service.dto.DashboardSummaryResponse;
 import com.payflow.audit_service.dto.InvestigationResponse;
 import com.payflow.audit_service.dto.InvestigationSummaryDto;
 import com.payflow.audit_service.dto.TimelineEventDto;
+import com.payflow.audit_service.dto.ai.AiInvestigationResponse;
+import com.payflow.audit_service.dto.ai.InvestigationRequest;
+import com.payflow.audit_service.dto.ai.TimelineEvent;
 import com.payflow.audit_service.entity.DltEvent;
 import com.payflow.audit_service.entity.PaymentAuditEvent;
 import com.payflow.audit_service.repository.DltEventRepository;
 import com.payflow.audit_service.repository.PaymentAuditRepository;
+import com.payflow.audit_service.service.ai.AiInvestigationClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +32,9 @@ public class InvestigationService {
     private final PaymentAuditRepository auditRepository;
 
     private final DltEventRepository dltRepository;
+
+    private final AiInvestigationClient aiClient;
+
 
     public InvestigationResponse investigate(
             String paymentReference) {
@@ -405,6 +412,47 @@ public class InvestigationService {
                                 dltEventsByReference.getOrDefault(
                                         paymentReference,
                                         List.of())))
+                .toList();
+    }
+
+    public AiInvestigationResponse aiAnalysis(
+            String paymentReference) {
+
+        InvestigationResponse investigation =
+                investigate(paymentReference);
+
+        InvestigationRequest request =
+                InvestigationRequest.builder()
+                        .domain("PAYMENTS")
+                        .referenceId(paymentReference)
+                        .businessStatus(
+                                investigation.getPaymentStatus())
+                        .investigationStatus(
+                                investigation.getInvestigationStatus())
+                        .rootCause(
+                                investigation.getRootCause())
+                        .suggestedAction(
+                                investigation.getSuggestedAction())
+                        .timeline(mapTimeline(
+                                investigation.getTimeline()))
+                        .build();
+
+        return aiClient.investigate(request);
+    }
+
+
+    private List<TimelineEvent> mapTimeline(
+            List<TimelineEventDto> timeline) {
+
+        return timeline.stream()
+                .map(event ->
+                        TimelineEvent.builder()
+                                .eventType(event.getEventType())
+                                .status(event.getStatus())
+                                .timestamp(event.getTimestamp())
+                                .source(event.getSource())
+                                .description(event.getDescription())
+                                .build())
                 .toList();
     }
 }

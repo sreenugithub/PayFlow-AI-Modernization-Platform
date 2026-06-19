@@ -3,8 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/PayFlow-AI-Modernization-Platform.iml" filepath="$PROJECT_DIR$/.idea/PayFlow-AI-Modernization-Platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ai-investigation-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ai-investigation-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ai-investigation-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ai-investigation-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-gateway.test.iml" filepath="$PROJECT_DIR$/.idea/modules/api-gateway.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/audit-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/audit-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/audit-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/audit-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/payment-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/payment-service.main.iml" />
