@@ -4,9 +4,7 @@ import com.payflow.audit_service.dto.DashboardSummaryResponse;
 import com.payflow.audit_service.dto.InvestigationResponse;
 import com.payflow.audit_service.dto.InvestigationSummaryDto;
 import com.payflow.audit_service.dto.TimelineEventDto;
-import com.payflow.audit_service.dto.ai.AiInvestigationResponse;
-import com.payflow.audit_service.dto.ai.InvestigationRequest;
-import com.payflow.audit_service.dto.ai.TimelineEvent;
+import com.payflow.audit_service.dto.ai.*;
 import com.payflow.audit_service.entity.DltEvent;
 import com.payflow.audit_service.entity.PaymentAuditEvent;
 import com.payflow.audit_service.repository.DltEventRepository;
@@ -454,5 +452,129 @@ public class InvestigationService {
                                 .description(event.getDescription())
                                 .build())
                 .toList();
+    }
+
+
+    public IncidentHistoryAnalysisResponse analyzeIncidentHistory() {
+
+        List<PaymentAuditEvent> auditEvents =
+                auditRepository
+                        .findTop50ByOrderByReceivedAtDesc();
+
+        List<IncidentSummary> incidents =
+                auditEvents.stream()
+                        .map(this::toIncidentSummary)
+                        .toList();
+
+        IncidentHistoryRequest request =
+                IncidentHistoryRequest.builder()
+                        .incidents(incidents)
+                        .build();
+
+        return aiClient.analyzeHistory(request);
+    }
+
+    private IncidentSummary toIncidentSummary(
+            PaymentAuditEvent event) {
+
+        List<DltEvent> dltEvents =
+                event.getPaymentReference() == null
+                        ? List.of()
+                        : dltRepository.findByPaymentReference(
+                                event.getPaymentReference());
+
+        String paymentStatus =
+                resolveAuditStatus(event);
+
+        String investigationStatus =
+                resolveInvestigationStatus(dltEvents);
+
+        String rootCause =
+                resolveIncidentRootCause(
+                        event,
+                        dltEvents);
+
+        return IncidentSummary.builder()
+                .paymentReference(
+                        event.getPaymentReference())
+                .paymentStatus(
+                        paymentStatus)
+                .investigationStatus(
+                        investigationStatus)
+                .rootCause(
+                        rootCause)
+                .ownerTeam(
+                        resolveIncidentOwnerTeam(rootCause))
+                .severity(
+                        resolveIncidentSeverity(
+                                paymentStatus,
+                                investigationStatus))
+                .build();
+    }
+
+    private String resolveIncidentRootCause(
+            PaymentAuditEvent event,
+            List<DltEvent> dltEvents) {
+
+        if (dltEvents != null && !dltEvents.isEmpty()) {
+            return dltEvents.stream()
+                    .map(DltEvent::getErrorReason)
+                    .filter(Objects::nonNull)
+                    .findFirst()
+                    .orElse("Technical processing failure");
+        }
+
+        if ("PAYMENT_STUCK".equalsIgnoreCase(event.getEventType())) {
+            return "Payment exceeded SLA threshold";
+        }
+
+        if ("FAILED".equalsIgnoreCase(resolveAuditStatus(event))) {
+            return "Payment processing failure";
+        }
+
+        return "No operational issues detected";
+    }
+
+    private String resolveIncidentOwnerTeam(
+            String rootCause) {
+
+        if (rootCause == null) {
+            return "Payment Operations";
+        }
+
+        String normalizedRootCause =
+                rootCause.toLowerCase();
+
+        if (normalizedRootCause.contains("kafka")
+                || normalizedRootCause.contains("message")) {
+            return "Messaging Team";
+        }
+
+        if (normalizedRootCause.contains("settlement")
+                || normalizedRootCause.contains("timeout")) {
+            return "Settlement Team";
+        }
+
+        return "Payment Operations";
+    }
+
+    private String resolveIncidentSeverity(
+            String paymentStatus,
+            String investigationStatus) {
+
+        if ("ATTENTION_REQUIRED".equalsIgnoreCase(investigationStatus)) {
+            return "CRITICAL";
+        }
+
+        if ("STUCK".equalsIgnoreCase(paymentStatus)
+                || "FAILED".equalsIgnoreCase(paymentStatus)) {
+            return "HIGH";
+        }
+
+        if ("PROCESSING".equalsIgnoreCase(paymentStatus)) {
+            return "MEDIUM";
+        }
+
+        return "LOW";
     }
 }

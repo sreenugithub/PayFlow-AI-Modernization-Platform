@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Box, Button, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import axiosClient from "../api/axiosClient";
 import SummaryCards from "../components/SummaryCards";
 import InvestigationTable from "../components/InvestigationTable";
 
 function Dashboard() {
+    const navigate = useNavigate();
     const [summary, setSummary] = useState(null);
     const [investigations, setInvestigations] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -43,7 +45,22 @@ function Dashboard() {
 
             <SummaryCards summary={summary} />
 
-            <h2>Investigations</h2>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    mb: 2
+                }}>
+                <h2>Investigations</h2>
+
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => navigate("/ai-insights")}>
+                    AI Insights
+                </Button>
+            </Box>
 
             <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
                 <TextField

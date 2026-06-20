@@ -4,6 +4,7 @@ import com.payflow.audit_service.dto.DashboardSummaryResponse;
 import com.payflow.audit_service.dto.InvestigationResponse;
 import com.payflow.audit_service.dto.InvestigationSummaryDto;
 import com.payflow.audit_service.dto.ai.AiInvestigationResponse;
+import com.payflow.audit_service.dto.ai.IncidentHistoryAnalysisResponse;
 import com.payflow.audit_service.service.InvestigationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -87,5 +88,13 @@ public class InvestigationController {
 
         return investigationService.aiAnalysis(
                 paymentReference);
+    }
+
+    @GetMapping("/incident-history-analysis")
+    public IncidentHistoryAnalysisResponse
+    analyzeIncidentHistory() {
+
+        return investigationService
+                .analyzeIncidentHistory();
     }
 }

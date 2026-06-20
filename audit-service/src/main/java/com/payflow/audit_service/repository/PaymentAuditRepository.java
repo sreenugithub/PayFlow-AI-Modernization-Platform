@@ -15,5 +15,8 @@ public interface PaymentAuditRepository
     List<PaymentAuditEvent>
     findByPaymentReferenceContainingIgnoreCase(
             String paymentReference);
-}
 
+    List<PaymentAuditEvent>
+    findTop50ByOrderByReceivedAtDesc();
+
+}

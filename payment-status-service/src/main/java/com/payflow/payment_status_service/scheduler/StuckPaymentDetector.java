@@ -14,7 +14,7 @@ public class StuckPaymentDetector {
 
     private final StuckPaymentPublisher stuckPaymentPublisher;
 
-    @Scheduled(fixedRate = 60000)
+    //@Scheduled(fixedRate = 23460000)
     public void detectStuckPayments() {
 
         log.info("Running stuck payment detection job");

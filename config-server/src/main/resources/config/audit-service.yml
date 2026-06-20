@@ -34,3 +34,4 @@ payment:
 ai-investigation:
   service:
     url: http://localhost:8086/api/ai/investigate
+    history-url: http://localhost:8086/api/ai/incident-history-analysis

@@ -1,7 +1,10 @@
 package com.payflow.ai_investigation_service.service;
 
 import com.payflow.ai_investigation_service.dto.InvestigationRequest;
+import com.payflow.ai_investigation_service.dto.openai.IncidentHistoryRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PromptBuilderService {
@@ -50,6 +53,64 @@ JSON format:
                 recommendedAction
         );
     }
+// -----------------------------
 
+    public String buildIncidentHistoryPrompt(
+            IncidentHistoryRequest request,
+            List<String> topRootCauses,
+            List<String> topOwnerTeams,
+            String severityTrend) {
 
+        return """
+You are an enterprise operations intelligence assistant.
+
+Analyze the incident history below.
+
+Total Incidents: %d
+
+Top Root Causes:
+%s
+
+Top Owner Teams:
+%s
+
+Severity Trend:
+%s
+
+Last 50 Incidents:
+%s
+
+Provide ONLY JSON.
+
+{
+  "aiSummary": "",
+  "recommendation": ""
+}
+"""
+                .formatted(
+                        request.getIncidents().size(),
+                        topRootCauses,
+                        topOwnerTeams,
+                        severityTrend,
+                        formatIncidents(request)
+                );
+    }
+
+    private String formatIncidents(
+            IncidentHistoryRequest request) {
+
+        return request.getIncidents()
+                .stream()
+                .map(incident ->
+                        "- paymentReference=%s, paymentStatus=%s, investigationStatus=%s, rootCause=%s, ownerTeam=%s, severity=%s"
+                                .formatted(
+                                        incident.getPaymentReference(),
+                                        incident.getPaymentStatus(),
+                                        incident.getInvestigationStatus(),
+                                        incident.getRootCause(),
+                                        incident.getOwnerTeam(),
+                                        incident.getSeverity()))
+                .toList()
+                .toString();
+    }
 }
