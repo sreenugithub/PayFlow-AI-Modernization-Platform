@@ -11,8 +11,18 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/audit-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/audit-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/config-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/config-server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/config-server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/config-server.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/discovery-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/discovery-server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/discovery-server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/discovery-server.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/notification-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/notification-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/payment-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/payment-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/payment-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/payment-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/payment-status-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/payment-status-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/payment-status-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/payment-status-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soa-modernization-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/soa-modernization-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soa-modernization-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/soa-modernization-service.test.iml" />
     </modules>
   </component>
 </project>

@@ -10,18 +10,7 @@ import {
     Typography
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-function getHealthColor(healthScore) {
-    if (healthScore === "CRITICAL") return "error";
-    if (healthScore === "MEDIUM") return "warning";
-    if (healthScore === "WARNING") return "warning";
-    return "success";
-}
-
-function getHealthLabel(healthScore) {
-    if (healthScore === "WARNING") return "MEDIUM";
-    return healthScore;
-}
+import { getRiskChipProps } from "../utils/riskStyle";
 
 function InvestigationTable({ investigations }) {
     const navigate = useNavigate();
@@ -45,31 +34,35 @@ function InvestigationTable({ investigations }) {
                 </TableHead>
 
                 <TableBody>
-                    {investigations.map((item) => (
-                        <TableRow
-                            key={item.paymentReference}
-                            hover
-                            sx={{ cursor: "pointer" }}
-                            onClick={() =>
-                                navigate(
-                                    `/investigation/${item.paymentReference}`
-                                )
-                            }>
-                            <TableCell>{item.paymentReference}</TableCell>
-                            <TableCell>{item.paymentStatus}</TableCell>
-                            <TableCell>{item.investigationStatus}</TableCell>
-                            <TableCell>
-                                <Chip
-                                    label={getHealthLabel(item.healthScore)}
-                                    color={getHealthColor(item.healthScore)}
-                                    size="small"
-                                />
-                            </TableCell>
-                            <TableCell>{item.totalEvents}</TableCell>
-                            <TableCell>{item.totalDltEvents}</TableCell>
-                        </TableRow>
+                    {investigations.map((item) => {
+                        const healthChipProps =
+                            getRiskChipProps(item.healthScore);
 
-                    ))}
+                        return (
+                            <TableRow
+                                key={item.paymentReference}
+                                hover
+                                sx={{ cursor: "pointer" }}
+                                onClick={() =>
+                                    navigate(
+                                        `/investigation/${item.paymentReference}`
+                                    )
+                                }>
+                                <TableCell>{item.paymentReference}</TableCell>
+                                <TableCell>{item.paymentStatus}</TableCell>
+                                <TableCell>{item.investigationStatus}</TableCell>
+                                <TableCell>
+                                    <Chip
+                                        {...healthChipProps}
+                                        size="small"
+                                        sx={healthChipProps.sx}
+                                    />
+                                </TableCell>
+                                <TableCell>{item.totalEvents}</TableCell>
+                                <TableCell>{item.totalDltEvents}</TableCell>
+                            </TableRow>
+                        );
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>

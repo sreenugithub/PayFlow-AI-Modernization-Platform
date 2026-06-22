@@ -15,6 +15,7 @@ import {
     Typography
 } from "@mui/material";
 import axiosClient from "../api/axiosClient";
+import { getRiskChipProps } from "../utils/riskStyle";
 
 function InvestigationDetail() {
 
@@ -29,18 +30,6 @@ function InvestigationDetail() {
         useState("");
     const [loading, setLoading] =
         useState(false);
-
-    const getSeverityColor = (severity) => {
-        if (severity === "CRITICAL" || severity === "HIGH") {
-            return "error";
-        }
-
-        if (severity === "MEDIUM") {
-            return "warning";
-        }
-
-        return "success";
-    };
 
     const getConfidenceColor = (confidence) => {
         if (confidence === "HIGH") {
@@ -153,17 +142,18 @@ function InvestigationDetail() {
                                                         size="small"
                                                         variant="outlined"
                                                     />
-                                                    {event.severity && (
-                                                        <Chip
-                                                            label={event.severity}
-                                                            size="small"
-                                                            color={
-                                                                event.severity === "CRITICAL"
-                                                                    ? "error"
-                                                                    : "default"
-                                                            }
-                                                        />
-                                                    )}
+                                                    {event.severity && (() => {
+                                                        const eventSeverityChipProps =
+                                                            getRiskChipProps(event.severity);
+
+                                                        return (
+                                                            <Chip
+                                                                {...eventSeverityChipProps}
+                                                                size="small"
+                                                                sx={eventSeverityChipProps.sx}
+                                                            />
+                                                        );
+                                                    })()}
                                                 </Stack>
                                             }
                                             secondary={
@@ -243,6 +233,12 @@ function InvestigationDetail() {
                         borderColor: "success.main"
                     }}>
                     <CardContent>
+                        {(() => {
+                            const severityChipProps =
+                                getRiskChipProps(aiResponse.severity);
+
+                            return (
+                                <>
                         <Typography variant="h5" sx={{ mb: 2 }}>
                             AI Analysis
                         </Typography>
@@ -271,9 +267,9 @@ function InvestigationDetail() {
                                     Severity
                                 </Typography>
                                 <Chip
-                                    label={aiResponse.severity}
-                                    color={getSeverityColor(aiResponse.severity)}
+                                    {...severityChipProps}
                                     size="small"
+                                    sx={severityChipProps.sx}
                                 />
                             </Box>
 
@@ -323,6 +319,9 @@ function InvestigationDetail() {
                                 {aiResponse.recommendedAction}
                             </Typography>
                         </Box>
+                                </>
+                            );
+                        })()}
                     </CardContent>
                 </Card>
             )}

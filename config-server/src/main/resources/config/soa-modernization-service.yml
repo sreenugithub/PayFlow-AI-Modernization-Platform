@@ -1,4 +1,4 @@
 openai:
-  api-key: ${OPENAI_API_KEY:}
+  api-key: ""
   model: gpt-5.4-mini
   url: https://api.openai.com/v1/responses
