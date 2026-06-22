@@ -1,0 +1,16 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: payment-validation-service
+
+external:
+  account-validation:
+    base-url: http://localhost:8091
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

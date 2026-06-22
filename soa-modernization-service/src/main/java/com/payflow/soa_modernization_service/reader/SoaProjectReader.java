@@ -4,10 +4,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.payflow.soa_modernization_service.model.GeneratedProject;
 import com.payflow.soa_modernization_service.prompt.SoaMigrationPromptBuilder;
 import com.payflow.soa_modernization_service.service.OpenAIService;
+import com.payflow.soa_modernization_service.service.ProjectWriterService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -20,8 +25,13 @@ public class SoaProjectReader {
 
     private final SoaMigrationPromptBuilder promptBuilder;
     private final  OpenAIService openAIService;
+    private final ProjectWriterService projectWriterService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @PostConstruct
-    public void test() {
+    public void test() throws JsonProcessingException {
 
         SoaProjectData data =
 
@@ -37,8 +47,16 @@ public class SoaProjectReader {
                 openAIService.generateProjectJson(prompt);
         System.out.println(" ************     aiResponse    ********** ");
 
-        System.out.println(aiResponse);
+        //System.out.println(aiResponse);
 
+        GeneratedProject project = objectMapper.readValue( aiResponse, GeneratedProject.class);
+
+        System.out.println(project.getProjectName());
+
+        System.out.println(project.getFiles().size());
+
+
+        projectWriterService.writeProject(project);
     }
     public SoaProjectData readProject(String projectPath) {
 
