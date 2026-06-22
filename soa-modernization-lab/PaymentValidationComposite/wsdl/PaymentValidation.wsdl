@@ -1,0 +1,18 @@
+<definitions
+    name="PaymentValidationService">
+
+    <message
+        name="PaymentValidationRequest"/>
+
+    <message
+        name="PaymentValidationResponse"/>
+
+    <portType
+        name="PaymentValidationPortType">
+
+        <operation
+            name="validatePayment"/>
+
+    </portType>
+
+</definitions>

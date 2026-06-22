@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element
+        name="PaymentValidationRequest">
+
+        <xsd:complexType>
+
+            <xsd:sequence>
+
+                <xsd:element
+                    name="paymentReference"
+                    type="xsd:string"/>
+
+                <xsd:element
+                    name="paymentType"
+                    type="xsd:string"/>
+
+                <xsd:element
+                    name="amount"
+                    type="xsd:double"/>
+
+            </xsd:sequence>
+
+        </xsd:complexType>
+
+    </xsd:element>
+
+</xsd:schema>

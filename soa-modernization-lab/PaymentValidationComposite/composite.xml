@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<composite name="PaymentValidationComposite">
+
+    <service name="PaymentValidationService"/>
+
+    <reference name="AccountValidationService"/>
+
+    <component name="PaymentValidationBPEL"/>
+
+</composite>

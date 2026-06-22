@@ -1,0 +1,16 @@
+<process
+    name="PaymentValidationProcess">
+
+    <receive
+        name="ReceivePaymentRequest"/>
+
+    <assign
+        name="ValidatePayment"/>
+
+    <invoke
+        name="AccountValidationService"/>
+
+    <reply
+        name="SendResponse"/>
+
+</process>
