@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.paymentvalidation.controller.PaymentValidationControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-06-22T17:43:36.254Z" hostname="Srinis-MacBook-Pro.local" time="0.076">
+  <properties/>
+  <testcase name="shouldReturnBadRequestForInvalidPayload()" classname="com.example.paymentvalidation.controller.PaymentValidationControllerTest" time="0.064"/>
+  <testcase name="shouldReturnOkForValidPayload()" classname="com.example.paymentvalidation.controller.PaymentValidationControllerTest" time="0.011"/>
+  <system-out><![CDATA[23:13:35.409 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.paymentvalidation.controller.PaymentValidationControllerTest]: PaymentValidationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:13:35.452 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.paymentvalidation.PaymentValidationApplication for test class com.example.paymentvalidation.controller.PaymentValidationControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.14)
+
+2026-06-22T23:13:35.580+05:30  INFO 24063 --- [payment-validation-service] [    Test worker] c.e.p.c.PaymentValidationControllerTest  : Starting PaymentValidationControllerTest using Java 21.0.11 with PID 24063 (started by srini in /Volumes/Work/PayFlow-AI-Modernization-Platform/generated-projects/payment-validation-service_2026-06-22_22-19-08)
+2026-06-22T23:13:35.580+05:30  INFO 24063 --- [payment-validation-service] [    Test worker] c.e.p.c.PaymentValidationControllerTest  : No active profile set, falling back to 1 default profile: "default"
+2026-06-22T23:13:36.219+05:30  INFO 24063 --- [payment-validation-service] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-06-22T23:13:36.219+05:30  INFO 24063 --- [payment-validation-service] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-06-22T23:13:36.220+05:30  INFO 24063 --- [payment-validation-service] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-06-22T23:13:36.251+05:30  INFO 24063 --- [payment-validation-service] [    Test worker] c.e.p.c.PaymentValidationControllerTest  : Started PaymentValidationControllerTest in 0.781 seconds (process running for 1.133)
+]]></system-out>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/Users/srini/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.17.8/f09415827a71be7ed621c7bd02550678f28bc81c/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

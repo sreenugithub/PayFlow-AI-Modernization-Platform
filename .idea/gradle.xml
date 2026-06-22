@@ -67,6 +67,15 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/generated-projects/payment-validation-service_2026-06-22T22:19:08.712729" />
+        <option name="gradleJvm" value="temurin-24" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/generated-projects/payment-validation-service_2026-06-22T22:19:08.712729" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/notification-service" />
         <option name="gradleJvm" value="temurin-24" />
         <option name="modules">

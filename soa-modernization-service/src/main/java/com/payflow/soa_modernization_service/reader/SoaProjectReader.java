@@ -30,7 +30,7 @@ public class SoaProjectReader {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @PostConstruct
+  /*  @PostConstruct
     public void test() throws JsonProcessingException {
 
         SoaProjectData data =
@@ -57,7 +57,7 @@ public class SoaProjectReader {
 
 
         projectWriterService.writeProject(project);
-    }
+    }*/
     public SoaProjectData readProject(String projectPath) {
 
         try {

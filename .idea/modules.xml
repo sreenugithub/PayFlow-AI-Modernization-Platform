@@ -22,7 +22,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/payment-status-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/payment-status-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/payment-status-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/payment-status-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/payment-validation-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/payment-validation-service.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/payment-validation-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/payment-validation-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/soa-modernization-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/soa-modernization-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/soa-modernization-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/soa-modernization-service.test.iml" />
     </modules>

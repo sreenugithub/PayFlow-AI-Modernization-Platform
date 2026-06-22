@@ -8,19 +8,26 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class ProjectWriterService {
 
     private static final String OUTPUT_DIR = "../generated-projects";
 
-    public void writeProject(GeneratedProject project) {
+    private static final DateTimeFormatter OUTPUT_TIMESTAMP_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+
+    public String writeProject(GeneratedProject project) {
 
         try {
-
             Path projectRoot = Path.of(
                     OUTPUT_DIR,
-                    project.getProjectName());
+                    project.getProjectName()
+                            + "_"
+                            + LocalDateTime.now()
+                            .format(OUTPUT_TIMESTAMP_FORMAT));
 
             Files.createDirectories(projectRoot);
 
@@ -39,17 +46,11 @@ public class ProjectWriterService {
                 Files.writeString(
                         targetFile,
                         file.getContent());
-
-                System.out.println(
-                        "Created: " + targetFile);
             }
 
-            System.out.println(
-                    "Project generated successfully : "
-                            + projectRoot);
+            return projectRoot.toString();
 
         } catch (IOException ex) {
-
             throw new RuntimeException(
                     "Failed to write generated project",
                     ex);
